@@ -6,6 +6,7 @@ const generateEditorElement = (type) => {
     id: generateID(),
     type,
     placeHolder: 'Placeholder Label',
+    label: type,
   };
 
   switch (type) {
@@ -70,12 +71,13 @@ export const globalSlice = createSlice({
 
     cloneEditorElement: (state, action) => {
       const { id } = action.payload;
-      const elementToClone = state.editorElements.find(
+      const elementToCloneIndex = state.editorElements.findIndex(
         (element) => element.id === id
       );
-      if (elementToClone) {
+      if (elementToCloneIndex !== -1) {
+        const elementToClone = state.editorElements[elementToCloneIndex];
         const clonedElement = { ...elementToClone, id: generateID() };
-        state.editorElements.push(clonedElement);
+        state.editorElements.splice(elementToCloneIndex + 1, 0, clonedElement);
       }
     },
   },

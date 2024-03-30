@@ -15,7 +15,7 @@ import { moveEditorElement,cloneEditorElement } from '../store/globalSlice';
 import DraggableTool from './DraggableTool';
 import Delete from './Delete';
 
-const PanelRight = ({isDarkMode}) => {
+const PanelRight = ({label , isDarkMode}) => {
   const dispatch = useDispatch();
   const [activeIcon, setActiveIcon] = useState('left');
   const [isOpen, setIsOpen] = useState(true);
@@ -27,7 +27,7 @@ const PanelRight = ({isDarkMode}) => {
 
   const onDragStart = (e, index) => {
     e.dataTransfer.setData('index', index.toString());
-    e.target.style.opacity = ''; // Reduce opacity of dragged item
+    e.target.style.opacity = ''; 
   };
 
   const onDragOver = (e) => {
@@ -72,19 +72,19 @@ const PanelRight = ({isDarkMode}) => {
           icon={elementTypeIconMap[element.type]}
         >
           <li key={element.id} className="" draggable="true" onDragStart={(e) => onDragStart(e, index)} onDragOver={onDragOver} onDrop={(e) => onDrop(e, index)}>
-          <div className={`flex items-center hover:bg-[#393939] hover:shadow-md rounded p-[2px] ${isDarkMode ? ' text-white' : 'bg-white text-black'}`}>
-            <div className="w-6 h-6 bg-[#393939] rounded-md mr-2 flex items-center justify-center">
+          <div className={`flex items-center ml-[16px] hover:bg-[#393939] hover:shadow-md rounded p-[2px] ${isDarkMode ? ' text-white' : 'bg-white text-black'}`}>
+            <div className="absolute right-[210px] top-[10px] w-[10%] h-6 bg-[#393939] rounded-md mr-2 flex items-center justify-center">
             <h1>{elementTypeIconMap[element.type]}</h1></div>
             <div className='flex flex-col'>
               <strong className='text-[16px]'>{element.type}</strong>
-              <span className="text-[12px]">{element.placeHolder}</span>
+              <span className="text-[12px]">{element.label}</span>
             </div>
-            <div className='relative right-[-46px] h-[24px] w-[24px] bg-[#17c495] rounded text-center'>
+            <div className='absolute right-[30px] h-[24px] w-[24px] bg-[#17c495] rounded text-center'>
           <button className='text-white' onClick={() => cloneClick(element.id)} >
               <FaCopy />
             </button>
           </div>
-          <div className='relative right-[-50px] h-[24px] w-[24px] bg-[#17c495] rounded text-center' >
+          <div className='absolute right-[0px] h-[24px] w-[24px] bg-[#17c495] rounded text-center' >
           <Delete id={element.id} />
            </div>
           </div>

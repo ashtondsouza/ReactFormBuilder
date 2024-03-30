@@ -23,7 +23,7 @@ const Canvas = () => {
 
   const ref = useRef(null)
   const closeDrawerPanel = () => {
-    setActiveElementId(null); // Reset activeElementId to close the AttributePanel
+    setActiveElementId(null); 
   };
 
   const [, drop] = useDrop(() => ({
