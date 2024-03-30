@@ -8,7 +8,7 @@ const Nav = ({ isDarkMode, changeIcon , isOpen, activeIcon}) => {
     <>
       <nav className={`flex justify-between p-[3px] h-[80px] border border-1 border-solid border-gray-500 ${isDarkMode ? 'bg-[#191919] text-white' : 'bg-white text-black'}`}>
         <div className='flex items-center'>
-          <div><img className='h-[90px] mt-[-15px] pl-[30px]' src="../../public/image/logo.png" alt="" /></div>
+          <div><img className='h-[90px] mt-[-15px] pl-[70px]' src="../../public/image/logo.png" alt="" /></div>
           <div className='mt-[-14px]'>
             <h1 className={`ml-[-26px] text-2xl font-bold ${isDarkMode ? 'text-white' : 'text-black'}`}>Reactform</h1>
             <p className={`mt-[-10px] ml-[34px] text-sm font-semibold ${isDarkMode ? 'text-gray-400' : 'text-gray-600'}`}>BUILDER</p>
