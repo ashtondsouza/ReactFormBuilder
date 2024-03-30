@@ -110,7 +110,7 @@ const PanelRight = ({isDarkMode}) => {
       </div>
 
       <div className={`bg-[#262626] text-[15px] pt-[9px] pl-[11px] absolute transition-all duration-300 top-[602px] h-[35px] w-[35px] ${
-        isOpen ? "right-[310px]" : "right-[15px]"} ${isOpen ? 'right-[310px]' : 'right-[15px]'} rounded-md `} onClick={() => changeIcon('left')}>
+        isOpen ? "right-[310px]" : "right-[15px]"} ${isOpen ? 'right-[328px]' : 'right-[15px]'} rounded-md `} onClick={() => changeIcon('left')}>
         <button className="group transition-all duration-300">
           {activeIcon === 'left' ? <LuArrowRightToLine /> : <LuArrowLeftToLine />}
           <span className="hidden w-[80px] absolute right-[42px] top-[5px] bg-black p-1 text-[13px] text-white group-hover:inline rounded">
@@ -118,7 +118,7 @@ const PanelRight = ({isDarkMode}) => {
           </span>
         </button>
       </div>
-      <div className={`bg-[#262626] text-[15px] pt-[9px] pl-[11px] absolute transition-all duration-300 top-[645px] h-[35px] w-[35px] ${isOpen ? 'right-[310px]' : 'right-[15px]'} rounded-md `} >
+      <div className={`bg-[#262626] text-[15px] pt-[9px] pl-[11px] absolute transition-all duration-300 top-[645px] h-[35px] w-[35px] ${isOpen ? 'right-[328px]' : 'right-[15px]'} rounded-md `} >
         <button className="group transition-all duration-300">
           <GoShieldCheck />
           <span className="hidden absolute w-[50px] right-[42px] top-[5px] bg-black p-1 text-[13px] text-white group-hover:inline rounded">
