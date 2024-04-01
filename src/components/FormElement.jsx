@@ -6,81 +6,106 @@ import { openDrawer } from '../store/drawerSlice';
 import { cloneEditorElement } from '../store/globalSlice';
 import Delete from './Delete';
 
-const TextInput = ({ label, placeHolder }) => (
-  <div className="px-4 py-2 flex flex-col gap-1">
+const TextInput = ({ label, placeHolder, prefix, suffix }) => (
+  <div className="px-4 py-2 flex flex-col gap-1 h-[100px]">
     <label htmlFor="textInput">{label}</label>
-    <input
-      id="textInput"
-      type="text"
-      placeholder={placeHolder}
-      label={label}
-      className="bg-white p-1 rounded-lg border border-slate-300"
-    />
-  </div>
+    <div className="h-[40px] flex flex-row input-group rounded-lg border border-slate-300 hover:border-slate-600">
+      {prefix && <span className="input-prefix p-1 whitespace-nowrap">{prefix}</span>}
+      <input
+        id="textInput"
+        type="text"
+        placeholder={placeHolder}
+        label={label}
+        className="bg-white p-1 w-full "
+      />
+      {suffix && <span className="input-suffix p-1  whitespace-nowrap">{suffix}</span>}
+    </div>
+    </div>
+
 );
 
-const TextArea = ({ label, placeHolder }) => (
+const TextArea = ({ label, placeHolder,prefix,suffix }) => (
   <div className="px-4 py-2 flex flex-col gap-1">
     <label htmlFor="textArea">{label}</label>
+    <div className="flex flex-row input-group rounded-lg border border-slate-300 hover:border-slate-600">
+      {prefix && <span className="input-prefix p-1 whitespace-nowrap">{prefix}</span>}
     <textarea
       id="textArea"
       rows={3}
       placeholder={placeHolder}
       label={label}
-      className="bg-white p-1 rounded-lg border border-slate-300"
-    />
+      className="bg-white p-1 w-full "
+      />
+      {suffix && <span className="input-suffix p-1  whitespace-nowrap">{suffix}</span>}
+    </div>
   </div>
 );
 
-const Email = ({ label, placeHolder }) => (
+const Email = ({ label, placeHolder,prefix,suffix }) => (
   <div className="px-4 py-2 flex flex-col gap-1">
     <label htmlFor="emailInput">{label}</label>
+    <div className="flex flex-row input-group rounded-lg border border-slate-300 hover:border-slate-600">
+      {prefix && <span className="input-prefix p-1 whitespace-nowrap">{prefix}</span>}
     <input
       id="emailInput"
       type="email"
       placeholder={placeHolder}
       label={label}
-      className="bg-white p-1 rounded-lg border border-slate-300"
-    />
+      className="bg-white p-1 w-full "
+      />
+      {suffix && <span className="input-suffix p-1  whitespace-nowrap">{suffix}</span>}
+    </div>
   </div>
 );
 
-const Password = ({ label, placeHolder }) => (
+const Password = ({ label, placeHolder,prefix,suffix }) => (
   <div className="px-4 py-2 flex flex-col gap-1">
     <label htmlFor="passwordInput">{label}</label>
+    <div className="flex flex-row input-group rounded-lg border border-slate-300 hover:border-slate-600">
+      {prefix && <span className="input-prefix p-1 whitespace-nowrap">{prefix}</span>}
     <input
       id="passwordInput"
       type="password"
       placeholder={placeHolder}
       label={label}
-      className="bg-white p-1 rounded-lg border border-slate-300"
-    />
+      className="bg-white p-1 w-full "
+      />
+      {suffix && <span className="input-suffix p-1  whitespace-nowrap">{suffix}</span>}
+    </div>
   </div>
 );
 
-const Phone = ({ label, placeHolder }) => (
+const Phone = ({ label, placeHolder,prefix,suffix }) => (
   <div className="px-4 py-2 flex flex-col gap-1">
     <label htmlFor="phoneInput">{label}</label>
+    <div className="flex flex-row input-group rounded-lg border border-slate-300 hover:border-slate-600">
+      {prefix && <span className="input-prefix p-1 whitespace-nowrap">{prefix}</span>}
     <input
       id="phoneInput"
       type="tel"
       placeholder={placeHolder}
       label={label}
-      className="bg-white p-1 rounded-lg border border-slate-300"
-    />
+      className="bg-white p-1 w-full "
+      />
+      {suffix && <span className="input-suffix p-1  whitespace-nowrap">{suffix}</span>}
+    </div>
   </div>
 );
 
-const DateInput = ({ label, placeHolder }) => (
+const DateInput = ({ label, placeHolder,prefix,suffix }) => (
   <div className="px-4 py-2 flex flex-col gap-1">
     <label htmlFor="dateInput">{label}</label>
+    <div className="flex flex-row input-group rounded-lg border border-slate-300 hover:border-slate-600">
+      {prefix && <span className="input-prefix p-1 whitespace-nowrap">{prefix}</span>}
     <input
       id="dateInput"
       type="date"
       placeholder={placeHolder}
       label={label}
-      className="bg-white p-1 rounded-lg border border-slate-300"
-    />
+      className="bg-white p-1 w-full "
+      />
+      {suffix && <span className="input-suffix p-1  whitespace-nowrap">{suffix}</span>}
+    </div>
   </div>
 );
 
@@ -93,7 +118,7 @@ const ElementTypes = {
   'password': Password,
 };
 
-const FormElement = ({ withToolkit, setActiveElementId,description, ...props }) => {
+const FormElement = ({ withToolkit, setActiveElementId,description, prefix, suffix, ...props }) => {
   const { type, id,  label = ElementTypesText[type], placeHolder } = props;
   const dispatch = useDispatch();
 
@@ -108,7 +133,7 @@ const FormElement = ({ withToolkit, setActiveElementId,description, ...props }) 
 
   return (
     <div onClick={handleClick}>
-      {ElementTypes[type]({ label, placeHolder })}
+      {ElementTypes[type]({ label, placeHolder, prefix, suffix})}
       {description}
       {withToolkit && (
         <div className="group absolute inset-0 bg-transparent opacity-0 hover:opacity-100 flex p-2 px-10">

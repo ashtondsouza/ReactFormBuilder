@@ -12,12 +12,11 @@ const AttributePanel = ({ activeElementId, isDarkMode, closeDrawer }) => {
   );
 
   const [label, setLabel] = useState(element ? element.label : '');
-  const [description, setDescription] = useState(
-    element ? element.description : ''
-  );
-  const [placeHolder, setPlaceHolder] = useState(
-    element ? element.placeHolder : ''
-  );
+  const [description, setDescription] = useState(element ? element.description : '');
+  const [placeHolder, setPlaceHolder] = useState(element ? element.placeHolder : '');
+  const [prefix, setPrefix] = useState('');
+  const [suffix, setSuffix] = useState('');
+  
   const [isOpen, setIsOpen] = useState(true);
   const [activeIcon, setActiveIcon] = useState('left');
 
@@ -38,6 +37,8 @@ const AttributePanel = ({ activeElementId, isDarkMode, closeDrawer }) => {
       label,
       description,
       placeHolder,
+      prefix,
+      suffix
     };
 
     dispatch(
@@ -102,7 +103,33 @@ const AttributePanel = ({ activeElementId, isDarkMode, closeDrawer }) => {
      </div>
      </div>
 
-      <div className="mt-auto flex justify-end absolute top-[350px] left-[50px]">
+     <div className='flex flex-col w-[400px] border-t-[1px] border-b-[1px] border-gray-500'>
+
+     <div className={`${isOpen ? 'w-[400px]  h-[120px] visible ': 'h-[0px] invisible' } `}>
+     <div className="flex items-center gap-2 font-semibold h-[55px]">
+        <label className='pl-[30px] text-[14px] font-[400]' htmlFor="label">Prefix</label>
+        <input
+          type="text"
+          id="label"
+          value={prefix}
+          onChange={(e) => setPrefix(e.target.value)}
+          className="w-[190px] h-[30px] absolute right-[20px] bg-[#323232] border outline-none rounded p-2 focus:border-slate-700"
+        />
+      </div>
+
+      <div className="flex items-center gap-2 font-semibold h-[55px]">
+        <label className='pl-[30px] text-[14px] font-[400]' htmlFor="description">Suffix</label>
+        <input
+          id="description"
+          value={suffix}
+          onChange={(e) => setSuffix(e.target.value)}
+          className="w-[190px] h-[30px] absolute right-[20px] bg-[#323232] border outline-none rounded p-2 focus:border-slate-700"
+        ></input>
+      </div>
+     </div>
+     </div>
+
+      <div className="mt-auto flex justify-end absolute top-[20px] right-[50px]">
         <button
           onClick={applyChanges}
           className="px-2 py-1 bg-green-600 rounded font-semibold hover:ring-4 hover:ring-green-200 hover:bg-green-500 transition-all text-white"

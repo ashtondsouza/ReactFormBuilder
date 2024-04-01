@@ -7,6 +7,8 @@ const generateEditorElement = (type) => {
     type,
     placeHolder: 'Placeholder Label',
     label: type,
+    prefix: '',
+    suffix: '' 
   };
 
   switch (type) {
