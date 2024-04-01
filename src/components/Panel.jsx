@@ -15,7 +15,7 @@ import { IoMdSearch } from "react-icons/io";
 import { useDispatch } from 'react-redux'
 import { clearCanvas } from '../store/globalSlice';
 
-const Panel = ({isDarkMode}) => {
+const Panel = ({isDarkMode,toggleEdit, togglePreview}) => {
     const [searchTerm, setSearchTerm] = useState('');
     const [activeDiv, setActiveDiv] = useState('edit');
     const [activeIcon, setActiveIcon] = useState('left');
@@ -53,7 +53,7 @@ const Panel = ({isDarkMode}) => {
       <div
         className={`text-[15px] pt-[8px] pl-[11px] absolute transition-all duration-300 top-[150px] h-[35px] w-[35px] ${
           isOpen ? "left-[310px]" : "left-[15px]"}  rounded-t-md ${activeDiv === 'edit' ? 'bg-[#17c495]' : 'bg-[#262626]' }`}
-        onClick={() => toggleDiv('edit')}
+        onClick={() => {toggleDiv('edit');toggleEdit()}}
       >
         <button className="group transition-all duration-300">
           <FaRegEdit />
@@ -66,7 +66,7 @@ const Panel = ({isDarkMode}) => {
         className={`text-[15px] pt-[8px] pl-[11px] absolute transition-all duration-300 top-[180px] h-[35px] w-[35px] ${
           isOpen ? "left-[310px]" : "left-[15px]"
         } rounded-b-md ${activeDiv === 'view' ? 'bg-[#17c495]' : 'bg-[#262626]'}`}
-        onClick={() => toggleDiv('view')}
+        onClick={() => {toggleDiv('view');togglePreview()}}
       >
         <button className="group transition-all duration-300">
           <FaRegEye />

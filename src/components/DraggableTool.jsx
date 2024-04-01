@@ -49,6 +49,7 @@ const DraggableTool = ({ type, index, moveElement, children}) => {
     }),
   })
 
+  
   const opacity = isDragging ? 0.5 : 1
   drag(drop(ref))
 

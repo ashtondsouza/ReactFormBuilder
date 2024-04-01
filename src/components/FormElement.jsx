@@ -10,7 +10,8 @@ const TextInput = ({ label, placeHolder, prefix, suffix }) => (
   <div className="px-4 py-2 flex flex-col gap-1 h-[100px]">
     <label htmlFor="textInput">{label}</label>
     <div className="h-[40px] flex flex-row input-group rounded-lg border border-slate-300 hover:border-slate-600">
-      {prefix && <span className="input-prefix p-1 whitespace-nowrap">{prefix}</span>}
+
+        {prefix && <span className="input-prefix p-1 whitespace-nowrap">{prefix}</span>}
       <input
         id="textInput"
         type="text"
@@ -18,7 +19,9 @@ const TextInput = ({ label, placeHolder, prefix, suffix }) => (
         label={label}
         className="bg-white p-1 w-full "
       />
+    
       {suffix && <span className="input-suffix p-1  whitespace-nowrap">{suffix}</span>}
+
     </div>
     </div>
 

@@ -16,6 +16,14 @@ const App = () => {
   const [isDarkMode, setIsDarkMode] = useState(true);
   const [activeIcon, setActiveIcon] = useState('moon');
   const [isOpen, setIsOpen] = useState(true);
+  const [previewMode, setPreviewMode] = useState(false);
+
+  const toggleEdit = () => {
+    setPreviewMode(false)
+  };
+  const togglePreview = () => {
+    setPreviewMode(true);
+  };
 
   const changeIcon = () => {
     setActiveIcon(activeIcon === 'moon' ? 'sun' : 'moon');
@@ -40,8 +48,8 @@ const App = () => {
     <DndProvider backend={HTML5Backend}>
     <div className='flex w-full border border-gray-800 justify-between'>
     
-    <Panel isDarkMode={isDarkMode}  />
-    <Canvas/>
+    <Panel isDarkMode={isDarkMode} toggleEdit={toggleEdit} togglePreview={togglePreview} />
+    <Canvas previewMode={previewMode} />
     {isOpened && <AttributePanel activeElementId={activeElementId} isDarkMode={isDarkMode} />}
     <PanelRight isDarkMode={isDarkMode} />
     </div>

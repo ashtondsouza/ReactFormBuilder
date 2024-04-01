@@ -6,10 +6,9 @@ import { insertEditorElement, moveEditorElement } from '../store/globalSlice'
 import { RiDragDropLine } from "react-icons/ri";
 import DraggableTool from './DraggableTool'
 import FormElement from './FormElement'
-import { closeDrawer } from '../store/drawerSlice'; 
 import AttributePanel from './AttributePanel';
 
-const Canvas = () => {
+const Canvas = ({previewMode}) => {
   const [activeElementId, setActiveElementId] = useState(null);
 
   const [elements, setElements] = useState([]);
@@ -47,6 +46,20 @@ const Canvas = () => {
   drop(ref)
 
   const renderElements = (element, index) => {
+
+    if (previewMode) {
+      return (
+        <FormElement
+          key={element.id}
+          {...element}
+          id={element.id}
+          elements={elements}
+          updateElements={updateElements}
+          setActiveElementId={setActiveElementId}
+          index={index}
+        />
+      );
+    } else {
     return (
       <DraggableTool
         key={element.id}
@@ -58,6 +71,7 @@ const Canvas = () => {
       </DraggableTool>
     )
   }
+}
 
   return (
     <>
@@ -78,6 +92,7 @@ const Canvas = () => {
         </div>
       </div>
       {activeElementId !== null && <AttributePanel activeElementId={activeElementId} closeDrawer={closeDrawerPanel} />}
+      
     </>
   )
 }
