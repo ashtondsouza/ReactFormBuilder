@@ -3,9 +3,10 @@ import { useDispatch, useSelector } from 'react-redux';
 import { ElementTypesText } from '../constants/elementTypes';
 import { FaMinus } from "react-icons/fa";
 import { FaPlus } from "react-icons/fa";
+import { WiMoonAltFull } from "react-icons/wi";
 import { updateEditorElement } from '../store/globalSlice';
 
-const AttributePanel = ({ activeElementId, isDarkMode, closeDrawer }) => {
+const AttributePanel = ({ activeElementId, isDarkMode, closeDrawer, toggleReadOnly, toggleDisabled }) => {
   const { editorElements } = useSelector((state) => state.global);
   const element = editorElements.find(
     (element) => element.id === activeElementId
@@ -18,7 +19,33 @@ const AttributePanel = ({ activeElementId, isDarkMode, closeDrawer }) => {
   const [suffix, setSuffix] = useState('');
   
   const [isOpen, setIsOpen] = useState(true);
-  const [activeIcon, setActiveIcon] = useState('left');
+  const [isRead, setIsRead] = useState(true);
+  const [activeIcon, setActiveIcon] = useState('minus');
+  const [readBtn, setReadBtn] = useState('left');
+  const [isDisable, setIsDisable] = useState(true);
+  const [disableBtn, setDisableBtn] = useState('left');
+
+  const toggleRead = () => {
+    setReadBtn(readBtn === 'left' ? 'right' : 'left');
+    toggleReadOnly()
+    setIsRead(!isRead)
+};
+
+const toggleDisable = () => {
+  setDisableBtn(disableBtn === 'left' ? 'right' : 'left');
+  toggleDisabled()
+  setIsDisable(!isDisable)
+};
+
+const activeDiv2 = (div) => {
+  setDisableBtn(div)
+
+ }
+
+ const activeDiv = (div) => {
+  setReadBtn(div)
+
+ }
 
   const changeIcon = () => {
     setActiveIcon(activeIcon === 'minus' ? 'plus' : 'minus');
@@ -38,7 +65,7 @@ const AttributePanel = ({ activeElementId, isDarkMode, closeDrawer }) => {
       description,
       placeHolder,
       prefix,
-      suffix
+      suffix,
     };
 
     dispatch(
@@ -125,9 +152,41 @@ const AttributePanel = ({ activeElementId, isDarkMode, closeDrawer }) => {
           onChange={(e) => setSuffix(e.target.value)}
           className="w-[190px] h-[30px] absolute right-[20px] bg-[#323232] border outline-none rounded p-2 focus:border-slate-700"
         ></input>
+      </div>      
+     </div>
+
+
+     </div>
+
+    <div className='flex flex-col' >
+    <div className="flex items-center gap-2  font-semibold h-[35px]">
+        <label className='pl-[30px] text-[14px] font-[400]' htmlFor="description">Read-Only</label>
+        <div className={`w-[54px] h-[23px] absolute right-[40px] border border-[#17c495] rounded-xl transition-all duration-300 ${isRead ? 'bg-[#262626]' : 'bg-[#17c495]'} `} onClick={() => {activeDiv('left');toggleRead()}}>
+            {readBtn === 'left' ?
+              <div className='h-[19px] w-[19px] bg-white transition-all duration-300 relative top-[1px] left-[2px] rounded-xl'>
+              <WiMoonAltFull className='text-[23px] font-bold text-gray-400 relative top-[-2px] left-[-2px]' />
+            </div>
+            : 
+              <div className='h-[19px] w-[19px] bg-white transition-all duration-300 relative top-[1px] left-[32px] rounded-xl'>
+              <WiMoonAltFull className='text-[23px] font-bold text-gray-400 relative top-[-2px] left-[-2px]'/>
+            </div>  }
+            </div>
       </div>
-     </div>
-     </div>
+
+      <div className="flex items-center gap-2  font-semibold h-[55px]">
+        <label className='pl-[30px] text-[14px] font-[400]' htmlFor="description">Disabled</label>
+        <div className={`w-[54px] h-[23px] absolute right-[40px] border border-[#17c495] rounded-xl transition-all duration-300 ${isDisable ? 'bg-[#262626]' : 'bg-[#17c495]'} `} onClick={() => {activeDiv2('left');toggleDisable()}}>
+            {disableBtn === 'left' ?
+              <div className='h-[19px] w-[19px] bg-white transition-all duration-300 relative top-[1px] left-[2px] rounded-xl'>
+              <WiMoonAltFull className='text-[23px] font-bold text-gray-400 relative top-[-2px] left-[-2px]' />
+            </div>
+            : 
+              <div className='h-[19px] w-[19px] bg-white transition-all duration-300 relative top-[1px] left-[32px] rounded-xl'>
+              <WiMoonAltFull className='text-[23px] font-bold text-gray-400 relative top-[-2px] left-[-2px]'/>
+            </div>  }
+            </div>
+      </div>
+    </div>
 
       <div className="mt-auto flex justify-end absolute top-[20px] right-[50px]">
         <button

@@ -6,7 +6,7 @@ import { openDrawer } from '../store/drawerSlice';
 import { cloneEditorElement } from '../store/globalSlice';
 import Delete from './Delete';
 
-const TextInput = ({ label, placeHolder, prefix, suffix }) => (
+const TextInput = ({ label, placeHolder, prefix, suffix, readOnly ,disabled}) => (
   <div className="px-4 py-2 flex flex-col gap-1 h-[100px]">
     <label htmlFor="textInput">{label}</label>
     <div className="h-[40px] flex flex-row input-group rounded-lg border border-slate-300 hover:border-slate-600">
@@ -17,6 +17,8 @@ const TextInput = ({ label, placeHolder, prefix, suffix }) => (
         type="text"
         placeholder={placeHolder}
         label={label}
+        readOnly={readOnly}
+        disabled={disabled}
         className="bg-white p-1 w-full "
       />
     
@@ -27,7 +29,7 @@ const TextInput = ({ label, placeHolder, prefix, suffix }) => (
 
 );
 
-const TextArea = ({ label, placeHolder,prefix,suffix }) => (
+const TextArea = ({ label, placeHolder, prefix, suffix, readOnly, disabled }) => (
   <div className="px-4 py-2 flex flex-col gap-1">
     <label htmlFor="textArea">{label}</label>
     <div className="flex flex-row input-group rounded-lg border border-slate-300 hover:border-slate-600">
@@ -37,6 +39,8 @@ const TextArea = ({ label, placeHolder,prefix,suffix }) => (
       rows={3}
       placeholder={placeHolder}
       label={label}
+      readOnly={readOnly}
+      disabled={disabled}
       className="bg-white p-1 w-full "
       />
       {suffix && <span className="input-suffix p-1  whitespace-nowrap">{suffix}</span>}
@@ -44,7 +48,7 @@ const TextArea = ({ label, placeHolder,prefix,suffix }) => (
   </div>
 );
 
-const Email = ({ label, placeHolder,prefix,suffix }) => (
+const Email = ({ label, placeHolder, prefix, suffix, readOnly, disabled }) => (
   <div className="px-4 py-2 flex flex-col gap-1">
     <label htmlFor="emailInput">{label}</label>
     <div className="flex flex-row input-group rounded-lg border border-slate-300 hover:border-slate-600">
@@ -54,6 +58,8 @@ const Email = ({ label, placeHolder,prefix,suffix }) => (
       type="email"
       placeholder={placeHolder}
       label={label}
+      readOnly={readOnly}
+      disabled={disabled}
       className="bg-white p-1 w-full "
       />
       {suffix && <span className="input-suffix p-1  whitespace-nowrap">{suffix}</span>}
@@ -61,7 +67,7 @@ const Email = ({ label, placeHolder,prefix,suffix }) => (
   </div>
 );
 
-const Password = ({ label, placeHolder,prefix,suffix }) => (
+const Password = ({ label, placeHolder, prefix, suffix, readOnly, disabled={disabled} }) => (
   <div className="px-4 py-2 flex flex-col gap-1">
     <label htmlFor="passwordInput">{label}</label>
     <div className="flex flex-row input-group rounded-lg border border-slate-300 hover:border-slate-600">
@@ -71,6 +77,8 @@ const Password = ({ label, placeHolder,prefix,suffix }) => (
       type="password"
       placeholder={placeHolder}
       label={label}
+      readOnly={readOnly}
+      disabled={disabled}
       className="bg-white p-1 w-full "
       />
       {suffix && <span className="input-suffix p-1  whitespace-nowrap">{suffix}</span>}
@@ -78,7 +86,7 @@ const Password = ({ label, placeHolder,prefix,suffix }) => (
   </div>
 );
 
-const Phone = ({ label, placeHolder,prefix,suffix }) => (
+const Phone = ({ label, placeHolder, prefix, suffix, readOnly, disabled}) => (
   <div className="px-4 py-2 flex flex-col gap-1">
     <label htmlFor="phoneInput">{label}</label>
     <div className="flex flex-row input-group rounded-lg border border-slate-300 hover:border-slate-600">
@@ -88,6 +96,8 @@ const Phone = ({ label, placeHolder,prefix,suffix }) => (
       type="tel"
       placeholder={placeHolder}
       label={label}
+      readOnly={readOnly}
+      disabled={disabled}
       className="bg-white p-1 w-full "
       />
       {suffix && <span className="input-suffix p-1  whitespace-nowrap">{suffix}</span>}
@@ -95,7 +105,7 @@ const Phone = ({ label, placeHolder,prefix,suffix }) => (
   </div>
 );
 
-const DateInput = ({ label, placeHolder,prefix,suffix }) => (
+const DateInput = ({ label, placeHolder, prefix, suffix, readOnly, disabled}) => (
   <div className="px-4 py-2 flex flex-col gap-1">
     <label htmlFor="dateInput">{label}</label>
     <div className="flex flex-row input-group rounded-lg border border-slate-300 hover:border-slate-600">
@@ -105,6 +115,8 @@ const DateInput = ({ label, placeHolder,prefix,suffix }) => (
       type="date"
       placeholder={placeHolder}
       label={label}
+      readOnly={readOnly}
+      disabled={disabled}
       className="bg-white p-1 w-full "
       />
       {suffix && <span className="input-suffix p-1  whitespace-nowrap">{suffix}</span>}
@@ -121,7 +133,7 @@ const ElementTypes = {
   'password': Password,
 };
 
-const FormElement = ({ withToolkit, setActiveElementId,description, prefix, suffix, ...props }) => {
+const FormElement = ({ withToolkit, setActiveElementId,description, prefix, suffix,readOnly, disabled, ...props }) => {
   const { type, id,  label = ElementTypesText[type], placeHolder } = props;
   const dispatch = useDispatch();
 
@@ -136,7 +148,7 @@ const FormElement = ({ withToolkit, setActiveElementId,description, prefix, suff
 
   return (
     <div onClick={handleClick}>
-      {ElementTypes[type]({ label, placeHolder, prefix, suffix})}
+      {ElementTypes[type]({ label, placeHolder, prefix, suffix, readOnly, disabled})}
       {description}
       {withToolkit && (
         <div className="group absolute inset-0 bg-transparent opacity-0 hover:opacity-100 flex p-2 px-10">

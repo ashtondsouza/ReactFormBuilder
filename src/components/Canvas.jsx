@@ -11,6 +11,16 @@ import AttributePanel from './AttributePanel';
 const Canvas = ({previewMode}) => {
   const [activeElementId, setActiveElementId] = useState(null);
 
+  const [readOnly, setReadOnly] = useState(false);
+  const [disabled, setDisabled] = useState(false); 
+
+  const toggleDisabled = () => {
+    setDisabled(prevDisabled => !prevDisabled); 
+  };
+  const toggleReadOnly = () => {
+    setReadOnly(prevReadOnly => !prevReadOnly); 
+  };
+
   const [elements, setElements] = useState([]);
 
   const updateElements = (updatedElements) => {
@@ -57,6 +67,8 @@ const Canvas = ({previewMode}) => {
           updateElements={updateElements}
           setActiveElementId={setActiveElementId}
           index={index}
+          readOnly={readOnly}
+          disabled={disabled}
         />
       );
     } else {
@@ -67,7 +79,7 @@ const Canvas = ({previewMode}) => {
         type={element.type}
         moveElement={(from, to) => dispatch(moveEditorElement({ from, to }))}
       >
-        <FormElement withToolkit {...element} id={element.id} elements={elements} updateElements={updateElements} setActiveElementId={setActiveElementId} index={index}/>
+        <FormElement withToolkit {...element} readOnly={readOnly} disabled={disabled} id={element.id} elements={elements} updateElements={updateElements} setActiveElementId={setActiveElementId} index={index}/>
       </DraggableTool>
     )
   }
@@ -91,7 +103,7 @@ const Canvas = ({previewMode}) => {
           {editorElements.map(renderElements)}
         </div>
       </div>
-      {activeElementId !== null && <AttributePanel activeElementId={activeElementId} closeDrawer={closeDrawerPanel} />}
+      {activeElementId !== null && <AttributePanel toggleReadOnly={toggleReadOnly} toggleDisabled={toggleDisabled} activeElementId={activeElementId} closeDrawer={closeDrawerPanel} />}
       
     </>
   )
